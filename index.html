@@ -96,6 +96,8 @@
         .embedContainer {
             opacity: 0;
             transition: opacity 1s ease;
+            width: calc(100% - 20px); /* 20px padding on each side */
+            margin: 0 auto; /* Center the container */
         }
 
         .showEmbed {
@@ -103,9 +105,10 @@
         }
 
         iframe {
-            margin-top: 20px;
-            border: none;
+            width: 100%;
+            height: calc(100vw * 9 / 16); /* 16:9 aspect ratio */
             max-width: 100%;
+            border: none;
         }
     </style>
 </head>
@@ -187,7 +190,7 @@
             const videoUrl = `https://vidsrc.to/embed/${mediaType.toLowerCase()}/${selectedId}${season ? `/${season}/${episode}` : ''}`;
 
             const embedContainer = document.getElementById('embedContainer');
-            embedContainer.innerHTML = `<iframe width="640" height="360" src="${videoUrl}" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts"></iframe>`;
+            embedContainer.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts"></iframe>`;
             embedContainer.classList.add('showEmbed');
 
             const resultButtons = document.querySelectorAll('.resultButton');
