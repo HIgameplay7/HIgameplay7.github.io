@@ -1,135 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMDB Search</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+        }
 
-<html>
-    <head>
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        div {
+            margin-bottom: 10px;
+        }
 
-var portfolio = document.createElement('div');
-portfolio.innerHTML = '<h1>John Doe</h1>';
-document.body.appendChild(portfolio);
+        label {
+            margin-right: 10px;
+        }
 
-portfolio.style.textAlign = 'center';
+        input {
+            padding: 5px;
+            margin-bottom: 10px;
+            font-family: 'Roboto', sans-serif;
+        }
 
-portfolio.firstChild.innerHTML = 'HTauK';
+        .typeButtons {
+            display: flex;
+            margin-bottom: 10px;
+        }
 
-var text = document.createElement('div');
-text.innerHTML = 'Hi, my name is HTauK and I am a 3d designer, rigger, coder, and animator. I have over 5 years of experience in the industry and have worked on a variety of projects, from small indie games to AA titles. I am a versatile and experienced artist who is always looking to push the boundaries of what is possible in the world of 3d graphics. I also have a strong interest in game development and enjoy working on all aspects of a project, from concept to completion. Coding is also a passion of mine, and I have experience in both C++ and Roblox Studio. If you are looking for an artist who is able to push the envelope and create amazing 3d graphics, then I am the person for you.';
-portfolio.appendChild(text);
+        .typeButton {
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            margin-right: 10px;
+            transition: opacity 1s ease, transform 1s ease, background-color 1s ease;
+        }
 
-text.style.margin = '20px';
+        .typeButton:hover,
+        .selected {
+            background-color: #2980b9;
+            color: #fff;
+        }
 
-var header = document.createElement('div');
-header.innerHTML = 'Some of my previous works:';
-portfolio.appendChild(header);
+        .selected {
+            opacity: 1;
+            transform: scale(1.1);
+        }
 
-header.style.fontSize = '30px';
+        #searchResults {
+            margin-top: 20px;
+        }
 
-header.style.fontWeight = 'bold';
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
 
-var image = document.createElement('img');
-image.src = 'https://i.ibb.co/dWw7r62/download.png';
-image.style.width = '300px';
-image.style.height = '300px';
-image.style.float = 'right';
-image.style.margin = '20px';
-image.style.border = '5px solid black';
-image.style.borderRadius = '5px';
-image.style.cursor = 'pointer';
-image.onclick = function() {
-  window.open('https://teamdatasearch.itch.io/seeking-signal-polyjam');
-};
-portfolio.appendChild(image);
+        li {
+            cursor: pointer;
+        }
 
-image.style.float = 'right';
+        .resultButton {
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: opacity 1s ease, background-color 1s ease, color 1s ease;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+        }
 
-image.style.float = 'left';
+        .resultButton:hover {
+            background-color: #2980b9;
+            color: #fff;
+        }
 
-var text2 = document.createElement('div');
-text2.innerHTML = 'Musician';
-portfolio.appendChild(text2);
+        .embedContainer {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
 
-text2.style.clear = 'both';
+        .showEmbed {
+            opacity: 1 !important;
+        }
 
-text2.style.float = 'left';
+        iframe {
+            margin-top: 20px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label for="searchTerm">Enter a keyword to search:</label>
+        <input type="text" id="searchTerm">
+    </div>
+    <div class="typeButtons">
+        <button class="typeButton" id="button1" onclick="setSearchType(1)">Movies</button>
+        <button class="typeButton" id="button2" onclick="setSearchType(2)">TV Shows</button>
+    </div>
+    <button onclick="searchTMDB()">Search</button>
 
-text2.style.margin = '20px';
+    <div id="searchResults"></div>
 
-text2.style.margin = '0px';
+    <div class="embedContainer" id="embedContainer"></div>
 
-var image2 = document.createElement('img');
-image2.src = 'https://media.istockphoto.com/vectors/question-mark-icon-flat-vector-illustration-design-vector-id1162198273?k=20&m=1162198273&s=612x612&w=0&h=s_5DDSXgMDkGq0sVqYpgD2AL1CuB9oK5UtmvMq6XBo8=';
-image2.style.width = '300px';
-image2.style.height = '300px';
-image2.style.float = 'left';
-image2.style.margin = '20px';
-image2.style.border = '5px solid black';
-image2.style.borderRadius = '5px';
-image2.style.cursor = 'pointer';
-image2.onclick = function() {
-  window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-};
-portfolio.appendChild(image2);
+    <script>
+        const apiKey = '2dd905cabb3b626926050bf60e5086eb';
+        let searchType = 1;
 
-image2.style.float = 'left';
+        function setSearchType(type) {
+            searchType = type;
+            const buttons = document.querySelectorAll('.typeButton');
+            buttons.forEach(button => button.classList.remove('selected'));
+            document.getElementById(`button${type}`).classList.add('selected');
+        }
 
-image2.style.float = 'right';
+        function searchTMDB() {
+            const searchTerm = document.getElementById('searchTerm').value;
 
-image2.style.marginTop = '-20px';
+            if (!searchTerm) {
+                alert('Please enter a keyword.');
+                return;
+            }
 
-image2.style.marginTop = '-40px';
+            const base_url = `https://api.themoviedb.org/3/search/${searchType === 1 ? 'movie' : 'tv'}`;
+            const url = `${base_url}?api_key=${apiKey}&query=${searchTerm}`;
 
-image2.style.marginTop = '-100px';
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const results = data.results;
+                    const searchResultsDiv = document.getElementById('searchResults');
+                    searchResultsDiv.innerHTML = '';
 
-image2.style.marginTop = '-200px';
+                    if (results.length === 0) {
+                        searchResultsDiv.innerHTML = 'No results found.';
+                        return;
+                    }
 
-image2.style.marginTop = '-300px';
+                    const resultList = document.createElement('ul');
+                    results.forEach((result, index) => {
+                        const mediaType = result.title ? 'Movie' : 'TV';
+                        const title = result.title || result.name;
 
-image2.style.marginTop = '-50px';
+                        const listItem = document.createElement('li');
+                        const button = document.createElement('button');
+                        button.className = 'resultButton';
+                        button.innerHTML = `${title} (${mediaType})`;
+                        button.addEventListener('click', () => showDetails(result, mediaType));
 
+                        listItem.appendChild(button);
+                        resultList.appendChild(listItem);
+                    });
 
+                    searchResultsDiv.appendChild(resultList);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
 
-image2.style.marginTop = '-350px';
+        function showDetails(selectedResult, mediaType) {
+            const selectedId = selectedResult.id;
+            const season = mediaType.toLowerCase() === 'tv' ? prompt('Enter the season number:') : null;
+            const episode = season ? prompt('Enter the episode number:') : null;
 
-image2.style.marginTop = '-25px';
+            const videoUrl = `https://vidsrc.to/embed/${mediaType.toLowerCase()}/${selectedId}${season ? `/${season}/${episode}` : ''}`;
 
-image2.style.marginTop = '-325px';
+            const embedContainer = document.getElementById('embedContainer');
+            embedContainer.innerHTML = `<iframe width="640" height="360" src="${videoUrl}" frameborder="0" allowfullscreen></iframe>`;
+            embedContainer.classList.add('showEmbed');
 
-image2.style.marginTop = '-330px';
+            const resultButtons = document.querySelectorAll('.resultButton');
+            resultButtons.forEach(button => {
+                setTimeout(() => {
+                    button.style.opacity = 0;
+                    button.style.color = 'transparent';
+                }, 0);
+            });
 
-var text3 = document.createElement('div');
-text3.innerHTML = '???';
-portfolio.appendChild(text3);
-
-text3.style.clear = 'both';
-
-text3.style.float = 'left';
-
-text3.style.float = 'right';
-
-text3.style.marginTop = '-20px';
-
-text3.style.marginBottom = '20px';
-
-text3.style.marginRight = '20px';
-
-portfolio.style.fontFamily = 'Arial';
-
-portfolio.style.fontFamily = 'Roboto';
-
-portfolio.style.fontFamily = 'Courier';
-
-document.body.style.backgroundColor = '#4b0082';
-
-portfolio.style.backgroundColor = '#ffffff';
-portfolio.style.borderRadius = '10px';
-portfolio.style.padding = '20px';
-portfolio.style.margin = '20px';
-
-portfolio.style.outline = '5px solid black';
-
-text2.style.color = '#ffffff';
-text3.style.color = '#ffffff';
-});
-			</script>
-     </head>
+            const selectedButton = event.target;
+            setTimeout(() => {
+                selectedButton.style.opacity = 1;
+                selectedButton.style.color = '#fff';
+            }, 0);
+        }
+    </script>
+</body>
 </html>
