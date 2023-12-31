@@ -11,16 +11,15 @@
             background-color: #2c3e50;
             margin: 0;
             padding: 0;
+            color: #fff;
+        }
+
+        #content {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            color: #fff;
-        }
-
-        div {
-            margin-bottom: 10px;
+            padding: 20px;
         }
 
         label {
@@ -35,6 +34,7 @@
 
         .typeButtons {
             display: flex;
+            flex-direction: column;
             margin-bottom: 10px;
         }
 
@@ -46,7 +46,7 @@
             cursor: pointer;
             font-family: 'Roboto', sans-serif;
             font-weight: bold;
-            margin-right: 10px;
+            margin-bottom: 10px;
             transition: opacity 1s ease, transform 1s ease, background-color 1s ease;
         }
 
@@ -63,6 +63,8 @@
 
         #searchResults {
             margin-top: 20px;
+            max-width: 100%;
+            overflow-x: auto;
         }
 
         ul {
@@ -72,10 +74,6 @@
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
-        }
-
-        li {
-            cursor: pointer;
         }
 
         .resultButton {
@@ -107,23 +105,25 @@
         iframe {
             margin-top: 20px;
             border: none;
+            max-width: 100%;
         }
     </style>
 </head>
 <body>
-    <div>
+    <div id="content">
         <label for="searchTerm">Enter a keyword to search:</label>
         <input type="text" id="searchTerm">
-    </div>
-    <div class="typeButtons">
-        <button class="typeButton" id="button1" onclick="setSearchType(1)">Movies</button>
-        <button class="typeButton" id="button2" onclick="setSearchType(2)">TV Shows</button>
-    </div>
-    <button onclick="searchTMDB()">Search</button>
+    
+        <div class="typeButtons">
+            <button class="typeButton" id="button1" onclick="setSearchType(1)">Movies</button>
+            <button class="typeButton" id="button2" onclick="setSearchType(2)">TV Shows</button>
+        </div>
+        <button onclick="searchTMDB()">Search</button>
 
-    <div id="searchResults"></div>
+        <div id="searchResults"></div>
 
-    <div class="embedContainer" id="embedContainer"></div>
+        <div class="embedContainer" id="embedContainer"></div>
+    </div>
 
     <script>
         const apiKey = '2dd905cabb3b626926050bf60e5086eb';
