@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TMDB Search</title>
+    <title>DomX</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -190,7 +191,7 @@
             const videoUrl = `https://vidsrc.to/embed/${mediaType.toLowerCase()}/${selectedId}${season ? `/${season}/${episode}` : ''}`;
 
             const embedContainer = document.getElementById('embedContainer');
-            embedContainer.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts"></iframe>`;
+            embedContainer.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allowfullscreen></iframe>`;
             embedContainer.classList.add('showEmbed');
 
             const resultButtons = document.querySelectorAll('.resultButton');
