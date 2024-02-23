@@ -189,7 +189,7 @@
             const season = mediaType.toLowerCase() === 'tv' ? prompt('Enter the season number:') : null;
             const episode = season ? prompt('Enter the episode number:') : null;
 
-            const videoUrl = `https://vidsrc.to/embed/${mediaType.toLowerCase()}/${selectedId}${season ? `/${season}/${episode}` : ''}`;
+            const videoUrl = `https://vidsrc.to/embed/${mediaType.toLowerCase()}/${selectedId}${season ? `/${season}/${episode}/#youtube.com-youtubei/v1/search` : ''}`;
 
             const embedContainer = document.getElementById('embedContainer');
             embedContainer.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allowfullscreen></iframe>`;
