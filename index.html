@@ -72,7 +72,7 @@
             background-color: #1e90ff;
         }
 
-        #searchResults {
+        #searchResults, #minecraftIframe {
             margin-top: 30px;
         }
 
@@ -116,23 +116,44 @@
 <body>
     <div class="overlay">
         <h1>DomX</h1>
-        <label for="searchTerm">Enter a keyword to search:</label>
-        <input type="text" id="searchTerm">
-    
-        <div class="typeButtons">
-            <button class="typeButton" id="button1" onclick="setSearchType(1)">Movies</button>
-            <button class="typeButton" id="button2" onclick="setSearchType(2)">TV Shows</button>
+        <div id="tabButtons">
+            <button class="tabButton selected" id="websiteTab" onclick="switchTab('website')">Movies/TV</button>
+            <button class="tabButton" id="minecraftTab" onclick="switchTab('minecraft')">Minecraft</button>
         </div>
-        <button onclick="searchTMDB()">Search</button>
 
-        <div id="searchResults"></div>
+        <div id="websiteContent" class="tabContent">
+            <label for="searchTerm">Enter a keyword to search:</label>
+            <input type="text" id="searchTerm">
+        
+            <div class="typeButtons">
+                <button class="typeButton" id="button1" onclick="setSearchType(1)">Movies</button>
+                <button class="typeButton" id="button2" onclick="setSearchType(2)">TV Shows</button>
+            </div>
+            <button onclick="searchTMDB()">Search</button>
 
-        <div class="embedContainer" id="embedContainer"></div>
+            <div id="searchResults"></div>
+
+            <div class="embedContainer" id="embedContainer"></div>
+        </div>
+
+        <div id="minecraftContent" class="tabContent" style="display: none;">
+            <iframe id="minecraftIframe" src="https://eaglercraft.com/mc/1.8.8/#youtube.com-youtubei/v1/search" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
 
     <script>
         const apiKey = '2dd905cabb3b626926050bf60e5086eb';
         let searchType = 1;
+
+        function switchTab(tabName) {
+            const tabButtons = document.querySelectorAll('.tabButton');
+            tabButtons.forEach(button => button.classList.remove('selected'));
+            document.getElementById(`${tabName}Tab`).classList.add('selected');
+
+            const tabContents = document.querySelectorAll('.tabContent');
+            tabContents.forEach(content => content.style.display = 'none');
+            document.getElementById(`${tabName}Content`).style.display = 'block';
+        }
 
         function setSearchType(type) {
             searchType = type;
