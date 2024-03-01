@@ -15,7 +15,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            position: relative;
             background-image: url('https://i.ibb.co/jvJJkWs/background.jpg'); /* Add your background image URL here */
             background-size: cover;
             background-position: center;
@@ -53,7 +54,7 @@
 
         .typeButton {
             padding: 10px 20px;
-            background-color: #b92929;
+            background-color: #2980b9;
             color: #fff;
             border: none;
             cursor: pointer;
@@ -65,11 +66,11 @@
         }
 
         .typeButton.selected {
-            background-color: #ff1e1e;
+            background-color: #1e90ff;
         }
 
         .typeButton:hover {
-            background-color: #ff1e1e;
+            background-color: #1e90ff;
         }
 
         #searchResults, #minecraftIframe {
@@ -111,13 +112,24 @@
             border: none;
             border-radius: 4px;
         }
+
+        /* Image in bottom right corner */
+        #donateImage {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+            z-index: 9999;
+        }
     </style>
 </head>
 <body>
     <div class="overlay">
         <img src="https://i.ibb.co/QdqqHNj/Screenshot-2024-02-27-3-52-29-PM-1.png" alt="DomX logo" width="220" height="40">
         <div id="tabButtons">
-            <button class="tabButton selected" id="websiteTab" onclick="switchTab('website')">Movies/TV</button>
+            <button class="tabButton selected" id="websiteTab" onclick="switchTab('website')">Website</button>
             <button class="tabButton" id="minecraftTab" onclick="switchTab('minecraft')">Minecraft</button>
         </div>
 
@@ -140,6 +152,11 @@
             <iframe id="minecraftIframe" src="https://eaglercraft.com/mc/1.8.8/#youtube.com-youtubei/v1/search" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
+
+    <!-- Donate Image -->
+    <a href="https://www.paypal.com/donate/?business=A2H2Q4UK6EAA8&no_recurring=0&item_name=This+helps+run+the+site+and+have+new+features+added%21&currency_code=USD" target="_blank">
+        <img id="donateImage" src="https://i.ibb.co/GTKxNGg/62977a1fe01809629f113558.png" alt="Donate">
+    </a>
 
     <script>
         const apiKey = '2dd905cabb3b626926050bf60e5086eb';
