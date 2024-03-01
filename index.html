@@ -130,7 +130,6 @@
         <img src="https://i.ibb.co/QdqqHNj/Screenshot-2024-02-27-3-52-29-PM-1.png" alt="DomX logo" width="220" height="40">
         <div id="tabButtons">
             <button class="tabButton selected" id="websiteTab" onclick="switchTab('website')">Website</button>
-            <button class="tabButton" id="minecraftTab" onclick="switchTab('minecraft')">Minecraft</button>
         </div>
 
         <div id="websiteContent" class="tabContent">
@@ -146,10 +145,6 @@
             <div id="searchResults"></div>
 
             <div class="embedContainer" id="embedContainer"></div>
-        </div>
-
-        <div id="minecraftContent" class="tabContent" style="display: none;">
-            <iframe id="minecraftIframe" src="https://eaglercraft.com/mc/1.8.8/#youtube.com-youtubei/v1/search" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -246,6 +241,11 @@
                 selectedButton.style.opacity = 1;
                 selectedButton.style.color = '#fff';
             }, 0);
+        }
+
+        // Function to open Minecraft HTML in a new tab
+        function openMinecraftPage() {
+            window.open('minecraft.html', '_blank');
         }
     </script>
 </body>
