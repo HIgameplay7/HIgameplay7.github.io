@@ -246,8 +246,10 @@
 
         // Function to open Minecraft HTML in a new tab
         function openMinecraftPage() {
-            window.open('minecraft.html', '_blank');
+            const newTab = window.open('about:blank', '_blank');
+            newTab.location.href = 'minecraft.html';
         }
+
     </script>
 </body>
 </html>
