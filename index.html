@@ -34,6 +34,7 @@
             width: 100%;
             max-width: 600px;
             text-align: center;
+            position: relative; /* Added to position the GIF container */
         }
 
         input[type="text"] {
@@ -143,11 +144,27 @@
             text-decoration: none;
             font-weight: bold;
         }
+
+        /* Gif Container */
+        .gif-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px;
+            width: 100px; /* Adjust as needed */
+            height: auto; /* Auto adjusts width */
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
     <div class="warning-banner">
         <p>WARNING: DO NOT UPDATE!!!! THIS PATCH WILL BREAK THE TESTNAV GLITCH. MAKE SURE YOU FOLLOW THE INSTRUCTIONS AT THIS LINK <a href="https://caub.glitch.me/#youtube.com-youtubei/v1/search" target="_blank">HERE</a></p>
+    </div>
+
+    <!-- Gif Container -->
+    <div class="gif-container">
+        <img src="https://media1.tenor.com/m/nFqna2wlL2gAAAAd/killer-fish-killer.gif" alt="Killer Fish" height="100">
     </div>
 
     <div class="overlay">
