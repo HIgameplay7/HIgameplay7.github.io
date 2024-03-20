@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clickteam Fusion Developer 2.5 HTML5 Runtime</title>
+<style type="text/css">
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#canvas {
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0); /* Fallback color */
+    /* Gradient */
+    background: linear-gradient(to bottom, rgb(17, 0, 255) 0%, rgb(255, 0, 0) 100%);
+}
+</style>
+</head>
+<body>
+    <canvas id="MMFCanvas" width="1280" height="720">
+        <p>Your browser does not support Canvas.</p>
+    </canvas>
+    <script>
+        // Runtime initialization
+        window.addEventListener("load", windowLoaded, false);
+        function windowLoaded() {
+            // Calls the runtime
+            // First parameter: name of the canvas element
+            // Second parameter: path to the cch file. Images and sounds must lie beside this file
+            new Runtime("MMFCanvas", "resources/FiveNightsatFreddys.cch");
+        }
+    </script>
+</body>
+</html>
