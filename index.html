@@ -173,7 +173,7 @@
         <img src="https://i.ibb.co/QdqqHNj/Screenshot-2024-02-27-3-52-29-PM-1.png" alt="DomX logo" width="220" height="40">
         <div id="tabButtons">
             <button class="tabButton selected" id="websiteTab" onclick="switchTab('website')">Website</button>
-            <button class="tabButton" id="minecraftTab" onclick="openMinecraftPage()">Minecraft</button>
+            <button class="tabButton" id="gamesTab" onclick="switchTab('games')">Games</button>
         </div>
 
         <div id="websiteContent" class="tabContent">
@@ -189,6 +189,12 @@
             <div id="searchResults"></div>
 
             <div class="embedContainer" id="embedContainer"></div>
+        </div>
+        <div id="gamesContent" class="tabContent" style="display: none;">
+            <ul>
+                <li><button class="resultButton" onclick="openMinecraftPage()">Minecraft</button></li>
+                <li><button class="resultButton" onclick="openFNAFPage()">FNaF 1</button></li>
+            </ul>
         </div>
     </div>
 
@@ -291,6 +297,10 @@
         function openMinecraftPage() {
             const newTab = window.open('about:blank', '_blank');
             newTab.location.href = 'minecraft.html';
+        }
+
+        function openFNAFPage() {
+            window.open('/fnaf1/index.html', '_blank');
         }
 
     </script>
