@@ -540,7 +540,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 
 	CServices.intToString = function (value, displayFlags)
 	{
-		var s = value.toString();
+		var s = "" + value;
 		if ((displayFlags & CCounter.CPTDISPFLAG_INTNDIGITS) != 0)
 		{
 			var nDigits = displayFlags & CCounter.CPTDISPFLAG_INTNDIGITS;
@@ -564,7 +564,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 		var s;
 		if ((displayFlags & CCounter.CPTDISPFLAG_FLOAT_FORMAT) == 0)
 		{
-			s = value.toString();
+			s = "" + value;
 		}
 		else
 		{
@@ -13016,7 +13016,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 			rhPtr.rh4CurToken++;
 			var nDecimals = rhPtr.get_ExpressionInt();
 
-			var temp = value.toString();
+			var temp = "" + value;
 			var result = new String();
 
 			var point = temp.indexOf(".");
@@ -13658,7 +13658,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 		{
 			rhPtr.rh4CurToken++;
 			var pValue = rhPtr.getExpression();
-			rhPtr.rh4Results[rhPtr.rh4PosPile] = pValue.toString();
+			rhPtr.rh4Results[rhPtr.rh4PosPile] = "" + pValue;
 		}
 	}
 	// CUT
