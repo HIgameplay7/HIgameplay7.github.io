@@ -141,7 +141,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 	}
 	CServices.formatDiscName = function (number, extension)
 	{
-		var s = number.toString();
+		var s = "" + number;
 		while (s.length < 4)
 			s = '0' + s;
 		s += '.' + extension;
