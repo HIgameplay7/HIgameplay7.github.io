@@ -184,6 +184,7 @@
         <div id="tabButtons">
             <button class="tabButton selected" id="websiteTab" onclick="switchTab('website')">Website</button>
             <button class="tabButton" id="gamesTab" onclick="switchTab('games')">Games</button>
+            <button class="tabButton" id="musicTab" onclick="openMusicPage()">Music</button>
         </div>
 
         <div id="websiteContent" class="tabContent">
@@ -343,6 +344,10 @@
 
         function openCookieClickerPage() {
             window.open('cookieclicker/index.html', '_blank');
+        }
+
+        function openMusicPage() {
+            window.open('https://app.holoplay.io/', '_blank');
         }
 
     </script>
