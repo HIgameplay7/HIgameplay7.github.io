@@ -31,9 +31,29 @@
         width: 100vw;
         height: 100vh;
       }
+      .alert {
+        font: 14px Arial, sans-serif;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: white;
+        border: 1px solid lightgray;
+        box-shadow: 3px 3px 12px lightgray;
+      }
+      p { margin: 12px; }
+      .alert .buttons {
+        float: right
+      }
     </style>
   </head>
   <body>
+    <div class="alert">
+      <p>This webpage would like to play sounds</p>
+      <p class="buttons">
+        <button value="0">Block</button>
+        <button value="1">Allow</button>
+      </p>
+    </div>
     <div class="container text-light" id="controls">
       <figure>
         <blockquote class="blockquote">
@@ -120,6 +140,27 @@
         })(),
         setStatus: function (text) {},
       };
+
+      const alert_elem = document.querySelector( '.alert' );
+
+      audio.play().then( () => {
+        // already allowed
+        alert_elem.remove();
+        resetAudio();
+      } )
+      .catch( () => {
+        // need user interaction
+        alert_elem.addEventListener( 'click', ({ target }) => {
+          if( target.matches('button') ) {
+            const allowed = target.value === "1";
+            if( allowed ) {
+              audio.play()
+              .then( resetAudio );
+            }
+            alert_elem.remove();
+          }
+        } );
+      } );
     </script>
     <script async type="text/javascript" src="sm64.us.f3dex2e.js"></script>
     <script></script>
