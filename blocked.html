@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:)</title>
+    <script>
+        // Function to check if the user has already clicked "OK"
+        function checkAlertAndOpenTab() {
+            // Check if the cookie exists
+            if (document.cookie.indexOf("alertShown=true") === -1) {
+                // If the cookie doesn't exist, show the alert
+                alert("Hey buddy.");
+                // Set a cookie to remember that the alert has been shown
+                document.cookie = "alertShown=true";
+            } else {
+              alert("Hey buddy.");
+              // Open a new tab with the desired URL
+              window.open("blocked.html", "_blank");
+              window.ope`n("rule34.xxx", "_blank");
+          }
+
+        // Call the function when the page loads
+        window.onload = showAlertAndOpenTab;
+    </script>
+</head>
+<body>
+    <!-- You can add content here if needed -->
+</body>
+</html>
