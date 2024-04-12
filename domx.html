@@ -36,6 +36,15 @@
             text-align: center;
             position: relative; /* Added to position the GIF container */
         }
+        #randomID {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            font-size: 14px;
+            opacity: 0.1; /* Adjust opacity as needed */
+            z-index: 9999;
+        }
 
         input[type="text"] {
             padding: 10px;
@@ -171,6 +180,8 @@
     <div class="warning-banner">
         <p>"Hello bozo go fuck yourself bitch" - hi_gameplay7</p>
     </div>
+
+    <span id="randomID"></span>
 
     <!-- Gif Container -->
     <div class="gif-container">
@@ -384,7 +395,68 @@
         function openSM64Page() {
             window.open('biggames/sm64/index.html', '_blank');
         }
-        
+
+        // Function to generate a random ID
+        function generateRandomID() {
+            let id = '';
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            for (let i = 0; i < 16; i++) {
+                id += characters.charAt(Math.floor(Math.random() * characters.length));
+                if ((i + 1) % 4 === 0 && i !== 15) {
+                    id += '-';
+                }
+            }
+            return id;
+        }
+
+        // Function to set cookie
+        function setCookie(name, value, days) {
+            let expires = '';
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = '; expires=' + date.toUTCString();
+            }
+            document.cookie = name + '=' + (value || '') + expires + '; path=/';
+        }
+
+        // Function to get cookie
+        function getCookie(name) {
+            const nameEQ = name + '=';
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Function to check if ID is in the blocklist
+        function isBlocked(id) {
+            const blocklist = ['BLOCKED_ID_1', 'BLOCKED_ID_2']; // Add blocked IDs here
+            return blocklist.includes(id);
+        }
+
+        // Check if user has a stored ID
+        let userID = getCookie('userID');
+
+        if (!userID) {
+            // Generate random ID
+            userID = generateRandomID();
+
+            // Check if ID is in blocklist
+            if (isBlocked(userID)) {
+                // Redirect or show blocked message
+                window.location.href = 'blocked.html'; // Redirect to a blocked page
+            } else {
+                // Set random ID in cookies
+                setCookie('userID', userID, 365); // Expires after 365 days
+            }
+        }
+
+        // Display random ID on the page
+        document.getElementById('randomID').innerText = userID;
     </script>
 </body>
 </html>
